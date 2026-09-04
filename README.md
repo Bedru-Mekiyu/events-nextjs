@@ -1,93 +1,174 @@
+# DevEvents — Developer Event Discovery & Management Platform
 
+[![CI Workflow](https://github.com/Bedru-Mekiyu/events-nextjs/actions/workflows/ci.yml/badge.svg)](https://github.com/Bedru-Mekiyu/events-nextjs/actions)
+![Next.js](https://img.shields.io/badge/Next.js-16.0.0-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38BDF8?logo=tailwindcss)
+![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb)
 
-Event Platform built to manage and showcase events seamlessly. It features a dynamic home page displaying upcoming events, robust API routes for CRUD operations, Cloudinary-powered image uploads, detailed event pages with registration and similar event suggestions, and integrated analytics to track user engagement and optimize performance.
+**DevEvents** is a full-stack web application for discovering, managing, and showcasing developer conferences, hackathons, and meetups. Built with Next.js 16 App Router, React 19, TypeScript, Tailwind CSS, MongoDB, Cloudinary, and PostHog.
 
+---
 
-- **[Cloudinary](https://jsm.dev/devevent-cloudinary)** is a cloud-based media management platform that simplifies image and video uploads, storage, optimization, and delivery. It helps developers manage media efficiently and improve website performance.
+## 🚀 Key Features
 
-- **[CodeRabbit](https://coderabbit.link/JSMastery)** is a platform that accelerates development workflows by providing AI-powered coding assistance and project scaffolding, helping developers generate code and reduce repetitive tasks.
+- **Event Showcase**: Browse featured upcoming developer events on a responsive landing page with interactive canvas background effects.
+- **Detailed Event Pages**: View event overviews, schedules/agendas, venue details, formats (online, offline, hybrid), audience target, tags, and organizer details.
+- **Similar Event Recommendations**: Discover related events based on matching technology tags.
+- **Event Booking / Registration**: Server actions to register user interest/bookings for events.
+- **Media Uploads via Cloudinary**: Seamless upload and hosting for event banner images.
+- **RESTful API Routes**: Comprehensive API endpoints (`/api/events`, `/api/events/[slug]`) supporting CRUD operations.
+- **Next.js 16 Caching**: Leverages Next.js 16 `use cache` directive and cache life policies (`cacheLife('hours')`) for optimized page performance.
+- **Product Analytics**: PostHog integration for tracking user engagement and page analytics.
 
-- **[MongoDB](https://www.mongodb.com/products/platform/atlas-database)** is a flexible, document-oriented NoSQL database that stores data in JSON-like format. It is ideal for modern applications that require scalability, high performance, and schema flexibility.
+---
 
-- **[Mongoose](https://mongoosejs.com/)** is an ODM (Object Data Modeling) library for MongoDB and Node.js. It provides a straightforward schema-based solution to model application data, validate inputs, and manage database interactions efficiently.
+## 🛠️ Technology Stack
 
-- **[Next.js](https://nextjs.org/docs)** is a powerful React framework for building full-stack web applications. It simplifies development with features like server-side rendering, static site generation, and API routes, enabling developers to focus on building products and shipping quickly.
+- **Framework**: Next.js 16 (App Router, Turbopack, Cache Components)
+- **Frontend Library**: React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4, OGL (3D canvas light ray effects), Lucide React icons
+- **Database**: MongoDB with Mongoose ODM
+- **Media Storage**: Cloudinary SDK
+- **Analytics**: PostHog (`posthog-js`, `posthog-node`)
+- **CI/CD**: GitHub Actions
 
-- **[PostHog](https://jsm.dev/devevent-posthog)** is an open-source product analytics platform that tracks user interactions, funnels, and feature usage. It enables teams to understand user behavior, optimize features, and make data-driven decisions.
+---
 
-- **[Tailwind CSS](https://tailwindcss.com/)** is a utility-first CSS framework that allows developers to quickly build custom user interfaces with minimal custom CSS. It promotes consistency, responsiveness, and faster styling without leaving the HTML.
+## 📂 Project Structure
 
-- **[TypeScript](https://www.typescriptlang.org/)** is a superset of JavaScript that adds static typing, providing better tooling, code quality, and error detection for developers. It is ideal for building large-scale applications and enhances the development experience.
-
-- **[Warp](https://go.warp.dev/js-mastery)** is a modern terminal designed for speed, collaboration, and usability. It enhances developer productivity with features like smart commands, workflows, and session sharing.
-
-
-
-## <a name="features">🔋 Features</a>
-
-👉 **Home Page**: Displays a dynamic list of events, allowing users to browse upcoming and featured events easily.  
-
-👉 **API Routes**: Create, update, delete, and fetch events from the database with fully functional endpoints.  
-
-👉 **Cloudinary Integration**: Use the Cloudinary SDK to easily upload and manage images in the cloud.  
-
-👉 **Event Details Page**: Shows event information with the ability to register and view a list of similar events.  
-
-👉 **Next.js 16 Caching**: Implements a completely new approach to caching for improved performance and faster page loads.  
-
-👉 **PostHog Analytics**: Tracks user interactions and events, providing detailed insights into app usage and behavior.
-
-
-And many more, including code architecture and reusability.
-
-## <a name="quick-start">🤸 Quick Start</a>
-
-Follow these steps to set up the project locally on your machine.
-
-**Prerequisites**
-
-Make sure you have the following installed on your machine:
-
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
-
-**Cloning the Repository**
-
-```bash
-git clone https://github.com/adrianhajdin/dev-events-nextjs16-crash-course.git
-cd dev-events-nextjs16-crash-course
+```text
+events-nextjs/
+├── .github/
+│   └── workflows/
+│       └── ci.yml             # GitHub Actions CI workflow (lint & build)
+├── app/
+│   ├── api/
+│   │   └── events/            # Next.js API endpoints (GET, POST, GET [slug])
+│   ├── events/
+│   │   └── [slug]/            # Dynamic route for event details page
+│   ├── favicon.ico
+│   ├── globals.css            # Tailwind CSS and layout styling
+│   ├── layout.tsx             # Root layout with Navbar, LightRays, & analytics
+│   └── page.tsx               # Landing page with featured events list
+├── components/                # Modular React UI components
+│   ├── BookEvent.tsx          # Event booking server action form
+│   ├── EventCard.tsx          # Card component for event previews
+│   ├── EventDetails.tsx       # Event detail layout component
+│   ├── ExploreBtn.tsx        # Scroll-to-explore CTA button
+│   ├── LightRays.tsx          # Interactive WebGL canvas background component
+│   └── Navbar.tsx             # Application navigation bar
+├── database/                  # Mongoose schemas and database models
+│   ├── booking.model.ts       # Booking schema definition
+│   ├── event.model.ts         # Event schema definition & slug pre-save hook
+│   └── index.ts               # Database models export entry point
+├── lib/
+│   ├── actions/               # Next.js Server Actions
+│   │   ├── booking.actions.ts # Action to record event bookings
+│   │   └── event.actions.ts   # Action to query similar events
+│   ├── constants.ts
+│   └── mongodb.ts             # Cached Mongoose connection helper
+├── public/                    # Static assets (images, icons, logos)
+├── eslint.config.mjs          # Flat ESLint configuration
+├── next.config.ts             # Next.js configuration (Turbopack, cache components)
+├── package.json
+└── tsconfig.json
 ```
 
-**Installation**
+---
 
-Install the project dependencies using npm:
+## ⚙️ Environment Variables
 
-```bash
-npm install
-```
-
-**Set Up Environment Variables**
-
-Create a new file named `.env` in the root of your project and add the following content:
+Create a `.env.local` file in the root directory and configure the following environment variables:
 
 ```env
-NEXT_PUBLIC_BASE_URL=http://localhost:3000/
+# Server & API Configuration
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
-MONGODB_URI=
+# Database Configuration
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/devevents?retryWrites=true&w=majority
 
-CLOUDINARY_URL=
+# Cloudinary Storage Configuration
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
 
-NEXT_PUBLIC_POSTHOG_KEY=
+# PostHog Analytics
+NEXT_PUBLIC_POSTHOG_KEY=phc_your_posthog_public_key
 NEXT_PUBLIC_POSTHOG_HOST=https://eu.i.posthog.com
 ```
 
-Replace the placeholder values with your real credentials. You can get these here: [**Cloudinary**](https://jsm.dev/devevent-cloudinary), [**MongoDB**](https://www.mongodb.com/products/platform/atlas-database), [**PostHog**](https://jsm.dev/devevent-posthog).
+---
 
-**Running the Project**
+## 💻 Getting Started
 
+### Prerequisites
+
+Ensure you have the following installed on your local machine:
+- **Node.js**: v20 or higher
+- **npm**: v10 or higher
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Bedru-Mekiyu/events-nextjs.git
+   cd events-nextjs
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Open application**:
+   Navigate to [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/events` | Fetches a list of all events sorted by creation date |
+| `POST` | `/api/events` | Creates a new event with image upload to Cloudinary |
+| `GET` | `/api/events/[slug]` | Fetches detailed information for a specific event by slug |
+
+---
+
+## 🧪 Quality Assurance & Building
+
+### Linting
+
+Run ESLint to check for code quality and syntax issues:
 ```bash
-npm run dev
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
+### Production Build
+
+Compile and build the Next.js application for production:
+```bash
+npm run build
+```
+
+---
+
+## 🔄 CI/CD Pipeline
+
+Automated checks run via GitHub Actions on every push or pull request to the `main` branch. The CI workflow (`.github/workflows/ci.yml`) executes the following steps:
+1. Environment setup (Node.js 20 & dependency caching)
+2. Dependency installation (`npm ci`)
+3. Static linting analysis (`npm run lint`)
+4. Production build compilation (`npm run build`)
+
+---
+
+## 📄 License
+
+Distributed under the MIT License.
